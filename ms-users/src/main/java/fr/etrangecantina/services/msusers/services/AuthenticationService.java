@@ -61,9 +61,4 @@ public class AuthenticationService {
         }
 
     }
-
-    @Transactional
-    public void activateAccount(String token) {
-        //TODO Method for activate account by admin
-    }
 }
