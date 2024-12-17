@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: ms-users
+          uri: lb://MS-USERS
+          predicates:
+            - Path=/users/v1/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:50002/eureka
+
+server:
+  port: 50003
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    com.netflix.discovery: DEBUG

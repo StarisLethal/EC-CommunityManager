@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: native
+  application:
+    name: ms-config
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/configuration
+server:
+  port: 50001

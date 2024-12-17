@@ -1,0 +1,5 @@
+spring:
+  config:
+    import: optional:configserver:http://localhost:50001
+  application:
+    name: ms-gateway

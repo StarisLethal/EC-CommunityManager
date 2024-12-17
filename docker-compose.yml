@@ -1,0 +1,37 @@
+services:
+  keycloackDB:
+    image: postgres:17
+    container_name: keycloak_db
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+      POSTGRES_DB: keycloak
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - keycloak_network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.7
+    container_name: keycloak
+    command: start-dev
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: keycloakDB
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "50005:8080"
+    depends_on:
+      - keycloackDB
+    networks:
+      - keycloak_network
+
+volumes:
+  postgres_data:
+
+networks:
+  keycloak_network:
